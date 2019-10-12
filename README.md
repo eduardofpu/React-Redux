@@ -1,7 +1,9 @@
 # React-Redux
 
+## API
 ```
 Utilizar o back end  da Api-contato
+
 ```
 
 
@@ -29,10 +31,24 @@ cd my-app
 npm start
 
 import
+npm install
 npm i react-router-dom  ou npm i react-router-dom --no-optional
 npm i redux --no-optional
 npm i react-redux --no-optional
 npm i redux-thunk --no-optional
 npm i redux-form --no-optional
+
+```
+## OBJETIVO
+
+```
+
+1 - Controlar os formulários com validações Exemplos: com state e redux na pasta page/exemplo-form
+2 - Demostrar como desabilitar botão 
+3 - Demostrar como desabilitar e habilitar um formulário clicando em um buttton na pasta: page/user/editar-contato.js
+4 - Demostrar como criar confirm alert com javascript e com o confirm alert do proprio react
+=> Com java script: -- page/user/editar-contato.js ->  deleteContato
+=> Com React:       -- page/user/form/FormEdit.js -> submit 
+5 - Realizar crud da api contato
 
 ```

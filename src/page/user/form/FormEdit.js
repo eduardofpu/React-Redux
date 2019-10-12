@@ -1,9 +1,9 @@
-import { reduxForm, Field } from 'redux-form'
-import { connect } from 'react-redux'
+import {reduxForm, Field} from 'redux-form'
+import {connect} from 'react-redux'
 import React from 'react'
-import { confirmAlert } from 'react-confirm-alert'; // Import
+import {confirmAlert} from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
-import { updateAction } from '../../../actions/user/UserAction';
+import {updateAction} from '../../../actions/user/UserAction';
 
 
 //Métodos de validação    
@@ -19,135 +19,139 @@ const minLength = value =>
 
 const email = value =>
     value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
-    'Endereço de email invalido' : undefined
+        'Endereço de email invalido' : undefined
 
 const aol = value =>
     value && /.+@hotmail\.com/.test(value) ?
-    'Realmente? Você ainda usa a HOTMAIL para seu email?' : undefined
+        'Realmente? Você ainda usa a HOTMAIL para seu email?' : undefined
 
 const UserFormFunc = props => {
 
     //setando o id para passar no request
     var id = props.id
-    console.log("teste",id)  
+    console.log("teste", id)
 
-//Component input
-const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
-  <div>
-  <label>{label}</label>
-  <div>
-      <input {...input} placeholder={label} type={type}/>
-      {touched && ((error && <span><font color="red">{error}</font></span>) || (warning && <span><font color="red">{warning}</font></span>))}
-  </div>
-  </div>
-)  
-const verifyId = () =>{
-  //Esse id esta vindo da tabela atraves do props.id
-  if(id!=null){
-    return true;
-  }
+    const verifyId = () => {
+        //Esse id vem do contato.js pelo props.id no FormEdit.js
+        if (id != null) {
+            return true;
+        }
 
-}  
-    
-const{handleSubmit, pristine, reset, submitting } = props
+    }
 
-    const submit = (data, updateAction) =>{
-    //Utiliza a importação confirmAlert do react-confirm-alert.css
 
-      //Verifica se o id e null caso seja o usuário devera clicar no botão Editar
-      if(!verifyId()){
-      
-        confirmAlert({
-          title: 'Atenção!!! clique no botão Editar',
-          message: 'Veja a lista de contato na tabela abaixo',
-          buttons: [
-            
-            {
-              label: 'Ok entendi'
-            }
-          ]
-        });   
-      
+    //Component input
+    const renderField = ({input, label, type, meta: {touched, error, warning}}) => (
+        <div>
+            <label>{label}</label>
+            <div>
+                <input {...input} placeholder={label} type={type} disabled={!verifyId()}/>
+                {touched && ((error && <span><font color="red">{error}</font></span>) || (warning &&
+                    <p><span><font color="red">{warning}</font></span></p>))}
+            </div>
+        </div>
+    )
 
-      }else{
+    const {handleSubmit, pristine, reset, submitting} = props
 
-        confirmAlert({
-          title: 'Editar contato',
-          message: 'Você deseja salvar as alterações?',
-          buttons: [
-            {
-              label: 'OK',
-               //o data e o payload  nome e email
-              onClick: () => updateAction(id,data)
-                                 
-            },
-            {
-              label: 'Cancel'
-            }
-          ]
-        });
-      }
+    const submit = (data, updateAction) => {
+        //Utiliza a importação confirmAlert do react-confirm-alert.css
+
+        //Verifica se o id e null caso seja o usuário devera clicar no botão Editar
+        if (!verifyId()) {
+
+            confirmAlert({
+                title: 'Atenção!!! clique no botão Editar',
+                message: 'Veja a lista de contato na tabela abaixo',
+                buttons: [
+
+                    {
+                        label: 'Ok entendi'
+                    }
+                ]
+            });
+
+
+        } else {
+
+            confirmAlert({
+                title: 'Editar contato',
+                message: 'Você deseja salvar as alterações?',
+                buttons: [
+                    {
+                        label: 'OK',
+                        //o data e o payload  nome e email
+                        onClick: () => updateAction(id, data)
+
+                    },
+                    {
+                        label: 'Cancel'
+                    }
+                ]
+            });
+        }
     }
 
     // o props captura no id, nome e o email passdo atraves de um estado no userEdit
-    return (       
-        
-        <div>    
-            <form onSubmit={handleSubmit((fields)=>submit(fields,updateAction))}>
+    return (
 
-             
-                <label>                  
-                id:{id}
-                </label><p></p> 
-                <Field 
-                type="hidden" 
-                name="id"
-                component="input"
-                required                
-                // label={["id:",id]}
-                
-                />
+        <div>
 
-                <label> <p></p>
-                Name: 
-                </label>
-                <Field 
-                type="text" 
-                name="nome" 
-                component={renderField}
-                validate={[required, maxLength10]}
-                warn={minLength}
-                label={props.nome}                
+            <form onSubmit={handleSubmit((fields) => submit(fields, updateAction))}>
+
+
+                <label>
+                    id:{id}
+                </label><p></p>
+                <Field
+                    type="hidden"
+                    name="id"
+                    component="input"
+                    required
+                    // label={["id:",id]}
+
                 />
 
                 <label><p></p>
-                Email:
+                    Name:
                 </label>
-                <Field 
-                type="text" 
-                name="email" 
-                component={renderField}  
-                label={props.email}            
-                validate={[required, email]}
-                warn={aol} 
-                             
-                /><p></p> 
-                              
-                <button disabled={submitting} type="submit" >Salvar</button>
-                <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>   
+                <Field
+                    type="text"
+                    name="nome"
+                    component={renderField}
+                    validate={[required, maxLength10]}
+                    warn={minLength}
+                    label={props.nome}
+                />
+
+                <label><p></p>
+                    Email:
+                </label>
+                <Field
+                    type="text"
+                    name="email"
+                    component={renderField}
+                    label={props.email}
+                    validate={[required, email]}
+                    warn={aol}
+
+                /><p></p>
+
+                <button disabled={submitting} type="submit">Salvar</button>
+                <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+                {/*<button type="button" onClick={props.mostrar}>{props.mostrar ? 'ON' : 'OFF'}</button>*/}
+
                 {/* <Button nameButton="Editar" disabled={submitting}></Button> */}
-                
-                
+
+
             </form>
         </div>
-    );  
-  }
+    );
+}
 const FormEdit = (reduxForm({
-form: 'myFormName'
+    form: 'myFormName'
 }))(UserFormFunc)
 
-const mapStateToProps = state =>({
-    
-})
+const mapStateToProps = state => ({})
 
-export default  connect(mapStateToProps,{updateAction})(FormEdit)       
+export default connect(mapStateToProps, {updateAction})(FormEdit)
