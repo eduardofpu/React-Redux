@@ -90,6 +90,9 @@ const UserFormFunc = props => {
                 ]
             });
         }
+        //atualiza a tabela contato
+        props.atualizarTabelaContato
+
     }
 
     // o props captura no id, nome e o email passdo atraves de um estado no userEdit

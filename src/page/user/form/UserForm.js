@@ -40,9 +40,8 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
 
   
 const{handleSubmit, pristine, reset, submitting } = props
-  
-   
-const submit = (data,submitUserAction) =>{
+
+    const submit = (data,submitUserAction) =>{
 
   //Utiliza a importação confirmAlert do react-confirm-alert.css
   confirmAlert({
@@ -59,6 +58,8 @@ const submit = (data,submitUserAction) =>{
    }
   ]
  });
+  //para atualizar a tabela sem o refresh da pagina
+  props.atualizarTabelaContato
 
 }
 

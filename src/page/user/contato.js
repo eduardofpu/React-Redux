@@ -48,7 +48,7 @@ return (
     
     <div>
         
-        <UserForm ></UserForm><br></br><br></br>
+        <UserForm atualizarTabelaContato = { this.buscarContato() }></UserForm><br></br><br></br>
         
         <table border='1'>
             <thead>

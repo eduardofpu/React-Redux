@@ -50,9 +50,12 @@ class UserEdit extends Component {
             //Atualiza a pagina
 
             // alert ('Excluido com sucesso!!')
-            setTimeout(function () {
-                location.reload();
-            }, 1);
+            // setTimeout(function () {
+            //     location.reload();
+            // }, 1);
+
+            //atualiza a tabela contato
+            this.buscarContato();
         } else {
             txt = "Cancel!";
         }
@@ -78,8 +81,12 @@ class UserEdit extends Component {
     mostrarFormEdit() {
         // Passando os estados para serem capturados na props dentro do FormEdit
         if (this.state.data.id != null) {
-            return <FormEdit id={this.state.data.id} nome={this.state.data.nome}
-                             email={this.state.data.email}></FormEdit>;
+            return <FormEdit
+                            id={this.state.data.id}
+                            nome={this.state.data.nome}
+                            email={this.state.data.email}
+                            atualizarTabelaContato = { this.buscarContato() }>
+                   </FormEdit>;
         }
     }
 

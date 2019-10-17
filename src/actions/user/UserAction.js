@@ -12,7 +12,7 @@ export const submitUserAction = (data) => {
     .then(json => {
         console.log(json)
         //Atualiza a pagina
-        setTimeout(function(){ location.reload(); }, 1);
+        // setTimeout(function(){ location.reload(); }, 1);
         alert ('Salvo com sucesso!!') 
      })
 }
@@ -30,7 +30,7 @@ export const updateAction = (id,data) => {
     .then(json => {
         console.log(json)
         //Atualiza a pagina
-        setTimeout(function(){ location.reload(); }, 1);
+        // setTimeout(function(){ location.reload(); }, 1);
         // alert ('Alterado com sucesso!!') 
     })
 }
