@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
-import {deleteAction} from '../../actions/user/UserAction';
+import {deleteActionId} from '../../actions/user/UserAction';
 import FormEdit from './form/FormEdit';
 
 
 class UserEdit extends Component {
 
     //A lista inicia vazia
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
         this.state = {lista: [], data: ''};
 
     }
@@ -26,39 +26,27 @@ class UserEdit extends Component {
                 this.setState({
                     lista: json
                 })
-                console.log("Data", json)
+                // console.log("Data", json)
             })
     }
 
     //Deleta os contatos atraves da tabela
-    deleteContato(codigo, event) {
+    deleteContato(id, event) {
         event.preventDefault();
-        //Transforma o valor do id em um json
-        let json = '{"id":' + codigo + '}';
 
-        //Realiza o parse para o formato json
-        let obj = JSON.parse(json);
-        console.log("json: ", obj)
+            var txt;;
+            var r = confirm("Deseja Excluir?");
+            if (r === true) {
+                txt = "OK!";
+
+                deleteActionId(id)
+                // this.buscarContato();
+
+            } else {
+                txt = "Cancel!";
+            }
 
 
-        //Deleta o objeto json ex {"id": 7}  usando o confirm do java script
-        var txt;
-        var r = confirm("Deseja Excluir?");
-        if (r == true) {
-            txt = "OK!";
-            deleteAction(obj);
-            //Atualiza a pagina
-
-            // alert ('Excluido com sucesso!!')
-            // setTimeout(function () {
-            //     location.reload();
-            // }, 1);
-
-            //atualiza a tabela contato
-            this.buscarContato();
-        } else {
-            txt = "Cancel!";
-        }
 
     }
 
@@ -74,13 +62,11 @@ class UserEdit extends Component {
             data: dados
         })
 
-        console.log("data", dados)
-
     }
 
     mostrarFormEdit() {
         // Passando os estados para serem capturados na props dentro do FormEdit
-        if (this.state.data.id != null) {
+        if (this.state.data.id != null ) {
             return <FormEdit
                             id={this.state.data.id}
                             nome={this.state.data.nome}
@@ -88,16 +74,22 @@ class UserEdit extends Component {
                             atualizarTabelaContato = { this.buscarContato() }>
                    </FormEdit>;
         }
+        return  this.buscarContato();
+
     }
 
     componentWillMount() {
         this.buscarContato();
     }
 
+    // componentWillUnmount(){
+    //     this.buscarContato();
+    // }
+
     render() {
         //Estado da lista atualizado
         const list = this.state.lista;
-        console.log("lista: ", list);
+        // console.log("lista: ", list);
 
         return (
 

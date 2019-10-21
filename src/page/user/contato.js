@@ -29,20 +29,20 @@ buscarContato(){
         this.setState({ 
             lista: dados
             })        
-            console.log("Data",dados)
+            // console.log("Data",dados)
         })
 }  
- 
-componentWillMount() {   
-    this.buscarContato();
-    
- }
+//
+// componentWillMount() {
+//     this.buscarContato();
+//
+//  }
  
 render() {
     
     //Estado da lista atualizado
     const list = this.state.lista;    
-    console.log("lista: ", list);  
+    // console.log("lista: ", list);
 
 return (       
     

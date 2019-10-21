@@ -13,7 +13,7 @@ export const submitUserAction = (data) => {
         console.log(json)
         //Atualiza a pagina
         // setTimeout(function(){ location.reload(); }, 1);
-        alert ('Salvo com sucesso!!') 
+        // alert ('Salvo com sucesso!!')
      })
 }
 
@@ -35,15 +35,11 @@ export const updateAction = (id,data) => {
     })
 }
 
-export const deleteAction = (data) => {    
-    let url = "http://localhost:8080/deletecontato"
+export const deleteActionId = (id) => {
+    let url = "http://localhost:8080/deletecontato/"+id
     fetch(url,{
-        method:"DELETE",
-        headers:{
-            'Content-type':'application/json'
-        },
-        body:JSON.stringify(data)
-       
+        method:"DELETE"
+
     }) .then(console.log("204 No Content"))
-    
+
 }

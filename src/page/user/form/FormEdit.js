@@ -91,7 +91,7 @@ const UserFormFunc = props => {
             });
         }
         //atualiza a tabela contato
-        props.atualizarTabelaContato
+        // props.atualizarTabelaContato
 
     }
 
@@ -142,9 +142,7 @@ const UserFormFunc = props => {
 
                 <button disabled={submitting} type="submit">Salvar</button>
                 <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
-                {/*<button type="button" onClick={props.mostrar}>{props.mostrar ? 'ON' : 'OFF'}</button>*/}
 
-                {/* <Button nameButton="Editar" disabled={submitting}></Button> */}
 
 
             </form>
